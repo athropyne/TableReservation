@@ -1,0 +1,8 @@
+fastapi[standard]
+sqlalchemy~=2.0.40
+psycopg[binary]==3.2.2
+alembic
+redis~=5.2.1
+pydantic-settings
+loguru~=0.7.3
+python-dotenv~=1.1.0
