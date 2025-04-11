@@ -18,15 +18,5 @@ reservations = Table(
     Column("customer_name", String(100), nullable=False),
     Column("table_id", ForeignKey(tables.c.id, onupdate="CASCADE", ondelete="CASCADE"), nullable=False),
     Column("reservation_time", DateTime, nullable=False),
-    Column("duration_minutes", Integer, nullable=False),
-
-    # ExcludeConstraint(
-    #     (Column('table_id'), '='),
-    #     (func.tstzrange(
-    #         Column('reservation_time'),
-    #         Column('reservation_time') + (Column('duration_minutes') * func.interval('1 minute'))),
-    #      '&&'),
-    #     name='exclude_overlapping_reservations',
-    #     using='gist'
-    # )
+    Column("duration_minutes", Integer, nullable=False)
 )
