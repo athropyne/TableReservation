@@ -48,5 +48,6 @@ class DeleteReservationService(BaseService):
         self.event_bus = event_bus
 
     async def __call__(self, reservation_id: ID) -> None:
-        await self.event_bus.publish(ReservationDeletedEvent(id=reservation_id))
         await self.repo(reservation_id)
+        await self.event_bus.publish(ReservationDeletedEvent(id=reservation_id))
+
