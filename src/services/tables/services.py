@@ -3,6 +3,7 @@ from fastapi import Depends
 from src.core.event_bus import EventBus
 from src.core.interfaces import BaseService
 from src.core.types import ID
+from src.services.tables import ReceivedTableListEvent, TableDeletedEvent
 from src.services.tables.dto.events import TableCreatedEvent
 from src.services.tables.dto.input import CreateTableDTO
 from src.services.tables.dto.output import TableFullInfo
@@ -25,20 +26,26 @@ class CreateTableService(BaseService):
 
 class GetTableListService(BaseService):
     def __init__(self,
-                 repo: GetTableListQuery = Depends()):
+                 repo: GetTableListQuery = Depends(),
+                 event_bus: EventBus = Depends()):
         self.repo = repo
+        self.event_bus = event_bus
 
     async def __call__(self,
                        skip: int,
                        limit: int) -> list[TableFullInfo]:
         result = await self.repo(skip, limit)
+        await self.event_bus.publish(ReceivedTableListEvent())
         return result
 
 
 class DeleteTableService(BaseService):
     def __init__(self,
-                 repo: DeleteTableCommand = Depends()):
+                 repo: DeleteTableCommand = Depends(),
+                 event_bus: EventBus = Depends()):
         self.repo = repo
+        self.event_bus = event_bus
 
     async def __call__(self, table_id: ID) -> None:
         await self.repo(table_id)
+        await self.event_bus.publish(TableDeletedEvent(table_id=table_id))
