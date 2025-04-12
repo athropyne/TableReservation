@@ -1,5 +1,4 @@
-from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, DateTime, func
-from sqlalchemy.dialects.postgresql import ExcludeConstraint
+from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, DateTime
 
 metadata = MetaData()
 tables = Table(

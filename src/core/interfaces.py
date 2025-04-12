@@ -35,11 +35,8 @@ class Singleton(ABC):
         return cls._instance
 
 
-class BaseLog(Singleton):
-    pass
-
-
 class Observer(ABC):
     @abstractmethod
     async def __call__(self, event: Event):
         pass
+

@@ -15,8 +15,11 @@ class Settings(BaseSettings):
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "postgres"
     POSTGRES_DB: str = "TableReservation"
-    DB_SOCKET: str = "db"
+    DB_SOCKET: str = "localhost"
     DB_LOGS: bool = False
+
+    # redis
+    REDIS_SOCKET: str = "localhost"
 
 
 settings = Settings()

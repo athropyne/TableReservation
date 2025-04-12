@@ -1,4 +1,5 @@
 fastapi[standard]
+faststream[redis]
 sqlalchemy~=2.0.40
 psycopg[binary]==3.2.2
 alembic
